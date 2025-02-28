@@ -17,12 +17,11 @@ body {
 
 /* Style the navigation bar */
 nav {
-    background-color: rgb(128, 212, 239);
+    background-color: #e6e4df;
     padding: 20px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    
+    justify-content: space-between;  
 }
 
 nav img {
@@ -46,7 +45,8 @@ nav a {
 }
 
 nav a:hover {
-    background-color: #023e8a;
+    background-color: #0db9d9;
+    padding: 8px 12px;
     border-radius: 5px;
 }
 
@@ -59,7 +59,7 @@ nav ul li button {
 }
 
 #btnSearch {
-    background-color: #ff5722;
+    background-color: #06994d;
     color: white;
     border: none;
 }
