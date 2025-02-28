@@ -15,6 +15,7 @@ body {
     
 }
 
+/* Style the navigation bar */
 nav {
     background-color: rgb(128, 212, 239);
     padding: 20px;
@@ -22,6 +23,10 @@ nav {
     align-items: center;
     justify-content: space-between;
     
+}
+
+nav img {
+    height: 50px; /* Adjust logo size */
 }
   
 nav ul {
@@ -38,4 +43,46 @@ nav a {
     text-decoration: none;
     color: rgb(255, 255, 255);
     font-weight: bold;
+}
+
+nav a:hover {
+    background-color: #023e8a;
+    border-radius: 5px;
+}
+
+/* Styling for search input and buttons */
+nav ul li input,
+nav ul li button {
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+#btnSearch {
+    background-color: #ff5722;
+    color: white;
+    border: none;
+}
+
+#btnClear {
+    background-color: #607d8b;
+    color: white;
+    border: none;
+}
+
+#btnSearch:hover,
+#btnClear:hover {
+    opacity: 0.8;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-top: 50px;
+}
+
+p {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 20px;
 }
