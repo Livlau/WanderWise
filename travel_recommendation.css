@@ -5,9 +5,10 @@
 }
 
 body {
-    margin: 0;
+    
     font-family: Arial, sans-serif;
-    background-image: url("./images/background_image.jpg");
+    text-align: center;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url("./images/background_image.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -17,7 +18,7 @@ body {
 
 /* Style the navigation bar */
 nav {
-    background-color: #e6e4df;
+    background-color: rgb(255, 255, 255, 0.8);
     padding: 20px;
     display: flex;
     align-items: center;
@@ -34,20 +35,24 @@ nav ul {
 }
   
 nav ul li {
+    
     display: inline;
     margin-right: 10px;
 }
   
 nav a {
     text-decoration: none;
-    color: rgb(255, 255, 255);
+    color: rgba(0, 0, 0, 0.8);
     font-weight: bold;
+    text-align: center;
 }
 
 nav a:hover {
-    background-color: #0db9d9;
+    background-color: rgb(6, 153, 77);
+    color: rgb(255, 255, 255);
     padding: 8px 12px;
     border-radius: 5px;
+    
 }
 
 /* Styling for search input and buttons */
@@ -59,14 +64,14 @@ nav ul li button {
 }
 
 #btnSearch {
-    background-color: #06994d;
-    color: white;
+    background-color: rgb(6, 153, 77);
+    color: rgb(255, 255, 255, 0.8);
     border: none;
 }
 
 #btnClear {
     background-color: #607d8b;
-    color: white;
+    color: rgb(255, 255, 255, 0.8);
     border: none;
 }
 
@@ -75,14 +80,53 @@ nav ul li button {
     opacity: 0.8;
 }
 
-h1 {
+#mainSection {
+    margin: 100px;
+    padding-left: 100px;
     text-align: center;
+}
+
+h1 {
+    color: rgb(0, 0, 0, 0.95);
+    /* text-align: center; */
     font-size: 2.5rem;
-    margin-top: 50px;
+    /* width: 55%; */
+    padding-bottom: 30px;
 }
 
 p {
-    text-align: center;
+    color: rgb(0, 0, 0, 0.85);
+    /* width: 600px; */
+    /* text-align: center; */
     font-size: 1.2rem;
-    margin-top: 20px;
+    padding-bottom: 30px;
+}
+
+.btnExploreBookNow {
+    padding: 8px 12px;
+    margin: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid rgb(214, 209, 209);
+}
+
+#btnExplore {
+    background-color: rgb(6, 153, 77);
+    color: rgb(255, 255, 255, 0.8);
+}
+
+#btnExplore:hover {
+    /* color: rgb(6, 153, 77); */
+    background-color: rgb(6, 153, 77, 0.8);
+}
+
+#btnBookNow {
+    color: rgb(6, 153, 77);
+    background-color: rgb(255, 255, 255, 0.8);
+    border: 1px solid rgb(6, 153, 77);
+}
+
+#btnBookNow:hover {
+    background-color: rgb(6, 153, 77);
+    color: rgb(255, 255, 255, 0.8);
 }
