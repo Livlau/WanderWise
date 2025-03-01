@@ -138,3 +138,21 @@ p {
     background-color: rgb(6, 153, 77);
     color: rgb(255, 255, 255, 0.8);
 }
+
+
+/* About us page*/
+.about-us {
+    text-align: center;
+    max-width: 500px;  
+}
+
+.btn-team {
+    color: rgb(6, 153, 77);
+    background-color: rgb(255, 255, 255, 0.8);
+    border: 1px solid rgb(6, 153, 77);
+}
+
+.btn-team:hover {
+    background-color: rgb(6, 153, 77);
+    color: rgb(255, 255, 255, 0.8);
+}

@@ -10,6 +10,13 @@ btnClear.addEventListener("click", clear);
 
 function search() {
     const query = searchInput.value.trim();
+
+    // fetch("travel_recommendation.json")
+    // .then(Response)
+
+
+
+
     alert(`search: ,${query}`);
 }
 
