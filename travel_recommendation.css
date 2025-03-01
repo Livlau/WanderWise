@@ -28,36 +28,40 @@ nav {
 nav img {
     height: 50px; /* Adjust logo size */
 }
-  
-nav ul {
-    list-style-type: none;
-    /* padding: 0; */
+
+.nav-links {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
 }
-  
-nav ul li {
-    
-    display: inline;
-    margin-right: 10px;
+
+.nav-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
-  
+
 nav a {
     text-decoration: none;
     color: rgba(0, 0, 0, 0.8);
     font-weight: bold;
-    text-align: center;
+    /* text-align: center; */
 }
 
 nav a:hover {
-    background-color: rgb(6, 153, 77);
-    color: rgb(255, 255, 255);
+    color: rgb(6, 153, 77);
+    text-decoration: solid underline rgb(6, 153, 77) 3px;
+    /* color: rgb(255, 255, 255);
+    font-weight: bold;
     padding: 8px 12px;
-    border-radius: 5px;
+    border-radius: 5px; */
     
 }
 
 /* Styling for search input and buttons */
-nav ul li input,
-nav ul li button {
+nav input,
+nav button {
     padding: 8px 12px;
     font-size: 16px;
     border-radius: 5px;
