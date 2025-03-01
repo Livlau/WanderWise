@@ -142,17 +142,78 @@ p {
 
 /* About us page*/
 .about-us {
+    margin: auto;
+    width: 50%;
     text-align: center;
-    max-width: 500px;  
+}
+
+#about-us-h1,
+#our-team-h2 {
+    padding: 100px;
+}
+
+/* Three columns side by side */
+/* .row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+} */
+.column {
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+    float: left;
+    width: 33.33%;
+    /* height: 250px; */
+    margin-bottom: 16px;
+    padding: 0 8px;
+}
+
+/* @media screen and (max-width: 650px) {
+    .column {
+      width: 100%;
+      display: block;
+    }
+} */
+
+
+/* Add some shadows to create a card effect */
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+}
+
+/* Some left and right padding inside the container */
+/* .container {
+    padding: 0 16px;
+    
+} */
+
+.title {
+    color: gray;
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+/* contact buttons */
+.btn-team {
+    display: inline-block;
+    padding: 8px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    width: 50%;
 }
 
 .btn-team {
-    color: rgb(6, 153, 77);
-    background-color: rgb(255, 255, 255, 0.8);
-    border: 1px solid rgb(6, 153, 77);
+    background-color: rgb(6, 153, 77);
+    color: rgb(255, 255, 255, 0.8);
 }
 
 .btn-team:hover {
-    background-color: rgb(6, 153, 77);
-    color: rgb(255, 255, 255, 0.8);
+    background-color: rgb(6, 153, 77, 0.8);
 }
