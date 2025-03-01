@@ -63,6 +63,10 @@ nav ul li button {
     border-radius: 5px;
 }
 
+nav input {
+    width: 300px;
+}
+
 #btnSearch {
     background-color: rgb(6, 153, 77);
     color: rgb(255, 255, 255, 0.8);

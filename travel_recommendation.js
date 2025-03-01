@@ -1,20 +1,23 @@
-const searchInput = document.getElementById(searchInput);
-const input = searchInput.trim();
-
+// Get references to input field, buttons, and search results div
+const searchInput = document.getElementById("searchInput");
 const btnSearch = document.getElementById("btnSearch");
-btnSearch.addEventListener("click", search);
-
 const btnClear = document.getElementById("btnClear");
+const result = document.getElementById("result");
+
+// Add eventlisteners to buttons
+btnSearch.addEventListener("click", search);
 btnClear.addEventListener("click", clear);
 
-function thankyou() {
-  alert('Thank you for contacting us!')
-}
-
 function search() {
-  alert("search");
+    const query = searchInput.value.trim();
+    alert(`search: ,${query}`);
 }
 
 function clear() {
-  searchInput = ""; 
+  searchInput.value = ""; 
+  result.value = "";
+}
+
+function thankyou() {
+  alert('Thank you for contacting us!');
 }
