@@ -86,11 +86,11 @@ function displayResults(results) {
 
     results.forEach(item => {
         const card = document.createElement("div");
-        card.classList.add("card");
+        card.classList.add("card-result");
         card.innerHTML = `
-            <img src="${item.imageUrl}" alt="${item.name}">
-            <strong>${item.name}</strong>
-            <p>${item.description}</p>
+            <img class="img-result" src="${item.imageUrl}" alt="${item.name}">
+            <h3 class="h3-result><strong>${item.name}</strong></h3>
+            <p class="p-result">${item.description}</p>
         `;
         result.appendChild(card);
     });

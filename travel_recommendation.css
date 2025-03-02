@@ -294,3 +294,20 @@ button[type="submit"]:hover {
     font-size: 1.5em;
     margin-bottom: 15px;
 }
+
+
+/* search results */
+.card-result {
+    width: 30%;
+    background-color: #1298dc;
+}
+
+.img-result {
+    margin: 10px;
+    width: 50%;
+    height: 250px;
+}
+
+.h3-result {
+    color: gray;
+}
