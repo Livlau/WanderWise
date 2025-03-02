@@ -229,3 +229,68 @@ p {
 .btn-team:hover {
     background-color: rgb(6, 153, 77, 0.8);
 }
+
+/* contact us */
+#contact-us-h1 {
+    margin: 100px;
+    text-align: center;
+}
+
+/* Center the contact form */
+.contact-div {
+    width: 520px; 
+    margin: 50px auto; 
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2); 
+}
+
+/* Ensure form fields are left-aligned */
+#contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style labels */
+label {
+    text-align: left;
+    /* font-weight: bold; */
+    margin-bottom: 6px;
+}
+
+/* Input and textarea styling */
+#name, 
+#email, 
+textarea {
+    width: 100%; 
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+}
+
+/* Submit button styling */
+button[type="submit"] {
+    width: 100%; 
+    background-color: rgb(6, 153, 77);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Button hover effect */
+button[type="submit"]:hover {
+    background-color: rgb(6, 153, 77, 0.8);
+}
+
+#submit-message {
+    display: none; 
+    color: rgb(6, 153, 77);
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}

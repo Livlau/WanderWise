@@ -25,6 +25,17 @@ function clear() {
   result.value = "";
 }
 
-function thankyou() {
-  alert('Thank you for contacting us!');
+function thankyou() {   
+    const messageDiv = document.getElementById("submit-message");
+    messageDiv.innerHTML = "Thank you for contacting us!";
+    messageDiv.style.display = "block"; 
+        
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("message").value = "";
+
+    setTimeout(() => {
+            messageDiv.style.display = "none";
+    }, 5000);
+
 }
