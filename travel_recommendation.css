@@ -173,8 +173,8 @@ p {
     float: left;
     width: 33.3%;
     /* height: 250px; */
-/*     margin: 50px 30px 100px 30px; */
-    padding: 10px 10px;
+    margin-bottom: 100px;
+    padding: 0px 10px;
 }
 
 /* @media screen and (max-width: 650px) {
@@ -352,4 +352,9 @@ button[type="submit"]:hover {
 
 .btn-result:hover {
     background-color: rgb(6, 153, 77, 0.8);
+}
+
+/* error message  */
+.error-message {
+    color: red;
 }

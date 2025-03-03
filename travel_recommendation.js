@@ -17,6 +17,12 @@ const searchAndDisplay = async (searchTerm) => {
     const storedData = await fetchData(); // Fetch JSON data
     // console.log(storedData.temples)
     // console.log(`This is search term: ${searchTerm}`)
+
+    if (searchTerm === "") {
+        result.innerHTML = `<p class="error-message">Please enter a destination or keyword.</p>`;
+        return;
+    }
+
     const searchKey = searchTerm.toLowerCase(); // Convert user input to lowercase
     // console.log(`This is search key: ${searchKey}`)
     let matchedCategory = null;
@@ -31,7 +37,7 @@ const searchAndDisplay = async (searchTerm) => {
     }
 
     if (!matchedCategory || !storedData[matchedCategory]) {
-        result.innerHTML = `<p>No results found for "${searchTerm}".</p>`;
+        result.innerHTML = `<p class="error-message">No results found for "${searchTerm}".</p>`;
         return;
     }
 
@@ -65,14 +71,22 @@ function clear() {
 
 // Thank you message function 
 function thankyou() {   
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const message = document.getElementById("message");
     const messageDiv = document.getElementById("submit-message");
-    messageDiv.innerHTML = "Thank you for contacting us!";
-    messageDiv.style.display = "block"; 
-        
-    document.getElementById("name").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("message").value = "";
 
+    if ( name.value === "" || email.value === "" || message.value === "") {
+        messageDiv.innerHTML = "Please provide infomation."
+    } else {
+        messageDiv.innerHTML = "Thank you for contacting us!";
+        messageDiv.style.display = "block"; 
+        name.value = "";
+        email.value = "";
+        message.value = "";
+
+    }
+    
     setTimeout(() => {
             messageDiv.style.display = "none";
     }, 5000);
