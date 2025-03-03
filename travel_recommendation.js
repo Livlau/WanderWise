@@ -43,6 +43,7 @@ const searchAndDisplay = async (searchTerm) => {
                     <img class="img-result" src="${item.imageUrl ? item.imageUrl : (item.cities && item.cities[0] ? item.cities[0].imageUrl : 'default.jpg')}">
                     <h3 class="h3-result">${item.name}</h3>
                     <p class="p-result">${item.description || 'No description available.'}</p>
+                    <button class="btn-result">Visit</button>
                 </div>
             `;
         }).join('');
