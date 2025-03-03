@@ -1,100 +1,59 @@
 // Get references to input field, buttons, and search results div
-const searchInput = document.getElementById("searchInput");
 const btnSearch = document.getElementById("btnSearch");
 const btnClear = document.getElementById("btnClear");
-const result = document.getElementById("result");
-
-
-// sanitize user input 
-// function sanitizeInput(input) {
-//     const sanitizeDiv = document.createElement("div");
-//     sanitizeDiv.textContent = input;
-//     return sanitizeDiv.innerHTML.trim().toLowerCase();
-// }
+const result = document.querySelector("#result");
 
 
 // fetch data and search user input 
-function fetchDataAndSearch() {
-    const searchTerm = searchInput.value.trim().toLowerCase();
-    if (searchTerm === '') {
-        return result.innerHTML = `<p style="color:red;">Please enter a destination or keyword</p>`;
-    }
-
-    result.innerHTML = ''; // Loading message
-
-    fetch("travel_recommendation_api.json") // Fetch JSON file
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            const results = searchData(data, searchTerm);
-            displayResults(results);
-        })
-        .catch(error => {
-            result.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
-        });
+const fetchData = async () => {
+    const res = await fetch("./travel_recommendation_api.json");
+    const data = await res.json();
+    return data
 }
-
-
-// search 
-function searchData(data, searchTerm) {
-    let results = [];
-    searchTerm = searchTerm.toLowerCase(); // Ensure case-insensitivity
-
-    if (["country", "countries"].includes(searchTerm)) {
-        results = data.countries.map(country => ({
-            type: "Country",
-            name: country.name,
-            description: `Country: ${country.name}`,
-            imageUrl: country.cities.imageUrl 
-        }));
-    } 
-    else if (["beach", "beaches"].includes(searchTerm)) {
-        results = data.beaches.map(beach => ({
-            type: "Beach",
-            name: beach.name,
-            description: beach.description,
-            imageUrl: beach.imageUrl
-        }));
-    } 
-    else if (["temple", "temples"].includes(searchTerm)) {
-        results = data.temples.map(temple => ({
-            type: "Temple",
-            name: temple.name,
-            description: temple.description,
-            imageUrl: temple.imageUrl
-        }));
-    }
-
-    return results;
-}
-
 
 
 // display search results
-function displayResults(results) {
-    // const result = document.getElementById("result");
-    result.innerHTML = ''; // Clear previous results
+const searchAndDisplay = async (searchTerm) => {
+    const storedData = await fetchData(); // Fetch JSON data
+    // console.log(storedData.temples)
+    // console.log(`This is search term: ${searchTerm}`)
+    const searchKey = searchTerm.toLowerCase(); // Convert user input to lowercase
+    // console.log(`This is search key: ${searchKey}`)
+    let matchedCategory = null;
 
-    if (results.length === 0) {
-        result.innerHTML = '<p>No results found.</p>';
+    // Check which category contains the search term
+    if (searchKey.includes("country") || searchKey.includes("countries")) {
+        matchedCategory = "countries";
+    } else if (searchKey.includes("temple") || searchKey.includes("temples")) {
+        matchedCategory = "temples";
+    } else if (searchKey.includes("beach") || searchKey.includes("beaches")) {
+        matchedCategory = "beaches";
+    }
+
+    if (!matchedCategory || !storedData[matchedCategory]) {
+        result.innerHTML = `<p>No results found for "${searchTerm}".</p>`;
         return;
     }
 
-    results.forEach(item => {
-        const card = document.createElement("div");
-        card.classList.add("card-result");
-        card.innerHTML = `
-            <img class="img-result" src="${item.imageUrl}" alt="${item.name}">
-            <h3 class="h3-result><strong>${item.name}</strong></h3>
-            <p class="p-result">${item.description}</p>
-        `;
-        result.appendChild(card);
-    });
-}
+    // Filter data based on user input
+    let displayData = storedData[matchedCategory]
+        .map(item => {
+            return `
+                <div class="card-result">
+                    <img class="img-result" src="${item.imageUrl ? item.imageUrl : (item.cities && item.cities[0] ? item.cities[0].imageUrl : 'default.jpg')}">
+                    <h3 class="h3-result">${item.name}</h3>
+                    <p class="p-result">${item.description || 'No description available.'}</p>
+                </div>
+            `;
+        }).join('');
+
+    // If no matches found within the category
+    if (displayData === "") {
+        displayData = `<p>No matching results in ${matchedCategory}.</p>`;
+    }
+    //display in HTML
+    result.innerHTML = displayData;
+};
 
 
 // clear search result function
@@ -120,5 +79,9 @@ function thankyou() {
 }
 
 // Add eventlisteners to buttons
-btnSearch.addEventListener("click", fetchDataAndSearch);
+btnSearch.addEventListener("click", () => {
+    const searchInput = document.getElementById("searchInput").value;
+    const searchTerm = searchInput.toLowerCase();
+    searchAndDisplay(searchTerm);
+});
 btnClear.addEventListener("click", clear);
