@@ -1,4 +1,5 @@
 // Get references to input field, buttons, and search results div
+const searchInput = document.querySelector("#searchInput");
 const btnSearch = document.getElementById("btnSearch");
 const btnClear = document.getElementById("btnClear");
 const result = document.querySelector("#result");
@@ -8,59 +9,86 @@ const result = document.querySelector("#result");
 const fetchData = async () => {
     const res = await fetch("./travel_recommendation_api.json");
     const data = await res.json();
+    console.log(`data`, data)
     return data
 }
 
 
 // display search results
-const searchAndDisplay = async (searchTerm) => {
+const searchAndDisplay = async () => {
+    let query = searchInput.value.toLowerCase().trim();
+    console.log(`Query:`, query);
+
+    if (!query) {
+        result.innerHTML = `Please enter a destination or keyword.`;
+        return;
+    }
+
     const storedData = await fetchData(); // Fetch JSON data
-    // console.log(storedData.temples)
-    // console.log(`This is search term: ${searchTerm}`)
+    console.log(`Stored Data:`, storedData);
 
-    if (searchTerm === "") {
-        result.innerHTML = `<p class="error-message">Please enter a destination or keyword.</p>`;
+    let results = [];
+
+    //Search in categories (countries, beaches, temples)
+    if ("countries".includes(query) || "country".includes(query)) {
+        results.push(...storedData.countries);
+    }
+    if ("beaches".includes(query) || "beach".includes(query)) {
+        results.push(...storedData.beaches);
+    }
+    if ("temples".includes(query) || "temple".includes(query)) {
+        results.push(...storedData.temples);
+    }
+
+    //Search in country names
+    results.push(
+        ...storedData.countries.filter(country =>
+            country.name.toLowerCase().includes(query)
+        )
+    );
+
+    //Search in cities inside matching countries
+    results.push(
+        ...storedData.countries.flatMap(country =>
+            country.cities.filter(city => city.name.toLowerCase().includes(query))
+        )
+    );
+
+    //Search in beaches
+    results.push(
+        ...storedData.beaches.filter(beach =>
+            beach.name.toLowerCase().includes(query)
+        )
+    );
+
+    //Search in temples
+    results.push(
+        ...storedData.temples.filter(temple =>
+            temple.name.toLowerCase().includes(query)
+        )
+    );
+
+    //If no results, display "Not found"
+    if (results.length === 0) {
+        result.innerHTML = `Not found`;
         return;
     }
 
-    const searchKey = searchTerm.toLowerCase(); // Convert user input to lowercase
-    // console.log(`This is search key: ${searchKey}`)
-    let matchedCategory = null;
+    // Display results
+    const displayResult = results.map(item => {
+        return `
+            <div class="card-result">
+                <img class="img-result" src="${item.imageUrl ? item.imageUrl : (item.cities && item.cities[0] ? item.cities[0].imageUrl : 'default.jpg')}" alt="${item.name}">
+                <h3 class="h3-result">${item.name}</h3>
+                <p class="p-result">${item.description || 'No description available.'}</p>
+                <button class="btn-result">Visit</button>
+            </div>
+        `;
+    }).join('');
 
-    // Check which category contains the search term
-    if (searchKey.includes("country") || searchKey.includes("countries")) {
-        matchedCategory = "countries";
-    } else if (searchKey.includes("temple") || searchKey.includes("temples")) {
-        matchedCategory = "temples";
-    } else if (searchKey.includes("beach") || searchKey.includes("beaches")) {
-        matchedCategory = "beaches";
-    }
-
-    if (!matchedCategory || !storedData[matchedCategory]) {
-        result.innerHTML = `<p class="error-message">No results found for "${searchTerm}".</p>`;
-        return;
-    }
-
-    // Filter data based on user input
-    let displayData = storedData[matchedCategory]
-        .map(item => {
-            return `
-                <div class="card-result">
-                    <img class="img-result" src="${item.imageUrl ? item.imageUrl : (item.cities && item.cities[0] ? item.cities[0].imageUrl : 'default.jpg')}">
-                    <h3 class="h3-result">${item.name}</h3>
-                    <p class="p-result">${item.description || 'No description available.'}</p>
-                    <button class="btn-result">Visit</button>
-                </div>
-            `;
-        }).join('');
-
-    // If no matches found within the category
-    if (displayData === "") {
-        displayData = `<p>No matching results in ${matchedCategory}.</p>`;
-    }
-    //display in HTML
-    result.innerHTML = displayData;
+    result.innerHTML = displayResult;
 };
+
 
 
 // clear search result function
@@ -95,8 +123,6 @@ function thankyou() {
 
 // Add eventlisteners to buttons
 btnSearch.addEventListener("click", () => {
-    const searchInput = document.getElementById("searchInput").value;
-    const searchTerm = searchInput.toLowerCase();
-    searchAndDisplay(searchTerm);
+    searchAndDisplay();
 });
 btnClear.addEventListener("click", clear);
