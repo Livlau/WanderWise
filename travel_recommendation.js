@@ -7,15 +7,33 @@ const result = document.querySelector("#result");
 
 // fetch data  
 const fetchData = async () => {
-    const res = await fetch("./travel_recommendation_api.json");
-    const data = await res.json();
-    return data
+    try {
+        const res = await fetch("./travel_recommendation_api.json");
+
+        if (!res.ok) {
+            throw new Error("Could not fetch data");
+        }
+
+        return data = await res.json();
+        
+    }
+    catch (error) {
+        console.error("Fetch error:", error);
+        return null;
+    } 
 }
 
 
 // get user search input and display results
 const searchAndDisplay = async () => {
     const storedData = await fetchData(); // fetch json data
+
+    if (!storedData) {
+        console.log("Failed to load data. Please try again later.");
+        return;
+    }
+
+    console.log("Data loaded successfully:", storedData);
     
     // change user input value to lower case
     const searchKey = searchInput.value.trim().toLowerCase();
